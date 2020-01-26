@@ -71,4 +71,29 @@ public class PostForObjectRestController {
         return postUser1;
     }
 
+    /**
+     * Post 根据 URL（字符串）、String 解析返回结果
+     *
+     * @param request
+     * @param response
+     * @return
+     * @see RestTemplate#postForObject(String, Object, Class, Object...)   字符串类型的 URL
+     */
+    @PostMapping("/postForObject3")
+    public String postForObject3(HttpServletRequest request, HttpServletResponse response) {
+
+        // 创建 RestTemplate 示例
+        RestTemplate restTemplate = new RestTemplate();
+
+        // URL
+        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/postUser1");
+
+        // 使用指定实体类解析返回结果
+        String postString = restTemplate.postForObject(url, null, String.class);
+
+        log.debug(postString);
+
+        return postString;
+    }
+
 }

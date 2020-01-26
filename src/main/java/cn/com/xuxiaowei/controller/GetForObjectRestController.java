@@ -71,4 +71,29 @@ public class GetForObjectRestController {
         return getUser1;
     }
 
+    /**
+     * Get 根据 URL（字符串）、String 解析返回结果
+     *
+     * @param request
+     * @param response
+     * @return
+     * @see RestTemplate#getForObject(String, Class, Object...) 字符串类型的 URL
+     */
+    @GetMapping("/getForObject3")
+    public String getForObject3(HttpServletRequest request, HttpServletResponse response) {
+
+        // 创建 RestTemplate 示例
+        RestTemplate restTemplate = new RestTemplate();
+
+        // URL
+        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/getUser1");
+
+        // 使用指定实体类解析返回结果
+        String getString = restTemplate.getForObject(url, String.class);
+
+        log.debug(getString);
+
+        return getString;
+    }
+
 }
