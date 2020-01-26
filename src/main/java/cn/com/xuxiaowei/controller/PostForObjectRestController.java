@@ -12,7 +12,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Spring Post 使用示例
+ * Spring Post {@link Object} 使用示例
  *
  * @author xuxiaowei
  * @since 0.0.1

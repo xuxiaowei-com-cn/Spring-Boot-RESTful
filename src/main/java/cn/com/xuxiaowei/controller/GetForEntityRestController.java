@@ -13,7 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Spring Get 使用示例
+ * Spring Get {@link ResponseEntity} 使用示例
  *
  * @author xuxiaowei
  * @since 0.0.1
