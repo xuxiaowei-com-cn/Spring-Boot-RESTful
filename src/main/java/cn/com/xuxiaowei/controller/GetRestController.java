@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @since 0.0.1
  */
 @RestController
-public class GetController {
+public class GetRestController {
 
     /**
      * %s：占位符，使用 {@link String#format(String, Object...)} 替换占位符

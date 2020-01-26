@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @since 0.0.1
  */
 @RestController
-public class PostController {
+public class PostRestController {
 
     /**
      * 自增序列号
