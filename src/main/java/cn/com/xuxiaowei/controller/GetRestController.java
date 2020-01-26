@@ -95,7 +95,7 @@ public class GetRestController {
      * @param request
      * @param response
      * @param username 参数
-     * @return 返回实体类，使用 jackson 将 {@link User} 转换为 JSON
+     * @return 返回实体类，使用 jackson 将 {@link User} 转换为 XML
      * @see <a href="https://github.com/FasterXML/jackson">jackson</a>
      */
     @GetMapping(value = "/getUserXml", produces = MediaType.APPLICATION_XML_VALUE)
