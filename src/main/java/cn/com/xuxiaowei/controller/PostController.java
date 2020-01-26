@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Post 请求
@@ -16,6 +17,11 @@ import java.util.UUID;
  */
 @RestController
 public class PostController {
+
+    /**
+     * 自增序列号
+     */
+    private final AtomicLong counter = new AtomicLong();
 
     /**
      * 获取实体类
@@ -28,7 +34,7 @@ public class PostController {
     @PostMapping(value = {"/postUser1"})
     public User postUser1(HttpServletRequest request, HttpServletResponse response) {
         User user = new User();
-        user.setUserId(System.currentTimeMillis());
+        user.setUserId(counter.incrementAndGet());
         user.setUsername("徐晓伟");
         user.setPassword(UUID.randomUUID().toString().replace("-", ""));
         return user;
