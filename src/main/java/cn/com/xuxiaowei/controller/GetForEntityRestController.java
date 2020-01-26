@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Spring Get 使用示例
@@ -39,6 +41,31 @@ public class GetForEntityRestController {
 
         // 使用指定实体类解析返回结果
         ResponseEntity<User> forEntity = restTemplate.getForEntity(url, User.class);
+
+        log.debug(String.valueOf(forEntity));
+
+        return forEntity;
+    }
+
+    /**
+     * Get 根据 URL（{@link URI}）、实体类 {@link User} 解析返回结果
+     *
+     * @param request
+     * @param response
+     * @return
+     * @see RestTemplate#getForEntity(URI, Class)  {@link URI} 类型的 URL
+     */
+    @GetMapping("/getForEntity2")
+    public ResponseEntity<User> getForEntity2(HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
+
+        // 创建 RestTemplate 示例
+        RestTemplate restTemplate = new RestTemplate();
+
+        // URL
+        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/getUser1");
+
+        // 使用指定实体类解析返回结果
+        ResponseEntity<User> forEntity = restTemplate.getForEntity(new URI(url), User.class);
 
         log.debug(String.valueOf(forEntity));
 
