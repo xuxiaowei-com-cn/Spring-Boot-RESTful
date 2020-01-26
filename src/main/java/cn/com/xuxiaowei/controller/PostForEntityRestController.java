@@ -81,7 +81,7 @@ public class PostForEntityRestController {
      * @see RestTemplate#postForEntity(String, Object, Class, Object...)  字符串类型的 URL
      */
     @PostMapping("/postForEntity3")
-    public ResponseEntity<String> postForEntity3(HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
+    public ResponseEntity<String> postForEntity3(HttpServletRequest request, HttpServletResponse response) {
 
         // 创建 RestTemplate 示例
         RestTemplate restTemplate = new RestTemplate();
