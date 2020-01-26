@@ -22,7 +22,7 @@ import java.net.URISyntaxException;
 public class PostForObjectRestController {
 
     /**
-     * Post 根据 URL（字符串）、实体类解析返回结果
+     * Post 根据 URL（字符串）、实体类 {@link User} 解析返回结果
      *
      * @param request
      * @param response
@@ -47,7 +47,7 @@ public class PostForObjectRestController {
     }
 
     /**
-     * Post 根据 URL（{@link URI}）、实体类解析返回结果
+     * Post 根据 URL（{@link URI}）、实体类 {@link User} 解析返回结果
      *
      * @param request
      * @param response
@@ -72,7 +72,7 @@ public class PostForObjectRestController {
     }
 
     /**
-     * Post 根据 URL（字符串）、String 解析返回结果
+     * Post 根据 URL（字符串）、{@link String} 解析返回结果
      *
      * @param request
      * @param response
