@@ -34,7 +34,7 @@ public class PostRestController {
      * @return 返回实体类，使用 jackson 将 {@link User} 转换为 JSON
      * @see <a href="https://github.com/FasterXML/jackson">jackson</a>
      */
-    @PostMapping(value = {"/postUser1"})
+    @PostMapping("/postUser1")
     public User postUser1(HttpServletRequest request, HttpServletResponse response, String username) {
         log.debug("username：{}", username);
         User user = new User();
