@@ -40,7 +40,7 @@ public class GetRestController {
      * @return 返回实体类，使用 jackson 将 {@link User} 转换为 JSON
      * @see <a href="https://github.com/FasterXML/jackson">jackson</a>
      */
-    @GetMapping(value = {"/getUser1"})
+    @GetMapping("/getUser1")
     public User getUser1(HttpServletRequest request, HttpServletResponse response, String username) {
         log.debug("username：{}", username);
         User user = new User();
@@ -61,7 +61,7 @@ public class GetRestController {
      *                 {@link RequestParam#defaultValue()}：默认值
      * @return
      */
-    @GetMapping(value = {"/getHi"})
+    @GetMapping("/getHi")
     public String getHi(HttpServletRequest request, HttpServletResponse response,
                         @RequestParam(value = "name", defaultValue = "World") String name) {
 
