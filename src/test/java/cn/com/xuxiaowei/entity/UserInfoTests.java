@@ -38,6 +38,9 @@ class UserInfoTests {
         log.debug(String.valueOf(readValue));
     }
 
+    /**
+     * XML 与 List 相互转化
+     */
     @Test
     void xmlBeanList() throws JsonProcessingException {
 
