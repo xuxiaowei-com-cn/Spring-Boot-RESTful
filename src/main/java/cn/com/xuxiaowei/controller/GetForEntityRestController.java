@@ -81,7 +81,7 @@ public class GetForEntityRestController {
      * @see RestTemplate#getForEntity(String, Class, Object...) 字符串类型的 URL
      */
     @GetMapping("/getForEntity3")
-    public ResponseEntity<String> getForEntity3(HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
+    public ResponseEntity<String> getForEntity3(HttpServletRequest request, HttpServletResponse response) {
 
         // 创建 RestTemplate 示例
         RestTemplate restTemplate = new RestTemplate();
