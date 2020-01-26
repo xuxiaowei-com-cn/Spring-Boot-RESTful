@@ -72,5 +72,29 @@ public class GetForEntityRestController {
         return forEntity;
     }
 
+    /**
+     * Get 根据 URL（字符串）、{@link String} 解析返回结果
+     *
+     * @param request
+     * @param response
+     * @return
+     * @see RestTemplate#getForEntity(String, Class, Object...) 字符串类型的 URL
+     */
+    @GetMapping("/getForEntity3")
+    public ResponseEntity<String> getForEntity3(HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
+
+        // 创建 RestTemplate 示例
+        RestTemplate restTemplate = new RestTemplate();
+
+        // URL
+        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/getUser1");
+
+        // 使用指定实体类解析返回结果
+        ResponseEntity<String> forEntity = restTemplate.getForEntity(url, String.class);
+
+        log.debug(String.valueOf(forEntity));
+
+        return forEntity;
+    }
 
 }
