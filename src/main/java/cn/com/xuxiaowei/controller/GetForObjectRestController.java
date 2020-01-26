@@ -39,11 +39,11 @@ public class GetForObjectRestController {
         String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/getUser1");
 
         // 使用指定实体类解析返回结果
-        User getUser1 = restTemplate.getForObject(url, User.class);
+        User user = restTemplate.getForObject(url, User.class);
 
-        log.debug(String.valueOf(getUser1));
+        log.debug(String.valueOf(user));
 
-        return getUser1;
+        return user;
     }
 
     /**
@@ -64,11 +64,11 @@ public class GetForObjectRestController {
         String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/getUser1");
 
         // 使用指定实体类解析返回结果
-        User getUser1 = restTemplate.getForObject(new URI(url), User.class);
+        User user = restTemplate.getForObject(new URI(url), User.class);
 
-        log.debug(String.valueOf(getUser1));
+        log.debug(String.valueOf(user));
 
-        return getUser1;
+        return user;
     }
 
     /**

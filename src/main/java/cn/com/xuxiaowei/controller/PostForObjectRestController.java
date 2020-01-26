@@ -39,11 +39,11 @@ public class PostForObjectRestController {
         String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/postUser1");
 
         // 使用指定实体类解析返回结果
-        User postUser1 = restTemplate.postForObject(url, null, User.class);
+        User user = restTemplate.postForObject(url, null, User.class);
 
-        log.debug(String.valueOf(postUser1));
+        log.debug(String.valueOf(user));
 
-        return postUser1;
+        return user;
     }
 
     /**
@@ -64,11 +64,11 @@ public class PostForObjectRestController {
         String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/postUser1");
 
         // 使用指定实体类解析返回结果
-        User postUser1 = restTemplate.postForObject(new URI(url), null, User.class);
+        User user = restTemplate.postForObject(new URI(url), null, User.class);
 
-        log.debug(String.valueOf(postUser1));
+        log.debug(String.valueOf(user));
 
-        return postUser1;
+        return user;
     }
 
     /**
