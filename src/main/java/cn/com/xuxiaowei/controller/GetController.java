@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Get 请求
@@ -21,7 +22,12 @@ public class GetController {
     /**
      * %s：占位符，使用 {@link String#format(String, Object...)} 替换占位符
      */
-    private static final String template = "Hello, %s!";
+    private static final String TEMPLATE = "Hello, %s!";
+
+    /**
+     * 自增序列号
+     */
+    private final AtomicLong counter = new AtomicLong();
 
     /**
      * 获取实体类
@@ -34,7 +40,7 @@ public class GetController {
     @GetMapping(value = {"/getUser1"})
     public User getUser1(HttpServletRequest request, HttpServletResponse response) {
         User user = new User();
-        user.setUserId(System.currentTimeMillis());
+        user.setUserId(counter.incrementAndGet());
         user.setUsername("徐晓伟");
         user.setPassword(UUID.randomUUID().toString().replace("-", ""));
         return user;
@@ -54,7 +60,7 @@ public class GetController {
     public String getHi(HttpServletRequest request, HttpServletResponse response,
                         @RequestParam(value = "name", defaultValue = "World") String name) {
 
-        return String.format(template, name);
+        return String.format(TEMPLATE, name);
     }
 
 }
