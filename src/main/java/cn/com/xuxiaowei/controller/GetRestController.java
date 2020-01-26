@@ -1,6 +1,8 @@
 package cn.com.xuxiaowei.controller;
 
 import cn.com.xuxiaowei.entity.User;
+import cn.com.xuxiaowei.entity.UserInfo;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,66 @@ public class GetRestController {
      * 自增序列号
      */
     private final AtomicLong counter = new AtomicLong();
+
+    /**
+     * 获取实体类
+     *
+     * @param request
+     * @param response
+     * @param username 参数
+     * @return 返回实体类，由于 {@link UserInfo} 使用了 {@link JacksonXmlRootElement} 等注解，默认返回为 XML
+     * @see <a href="https://github.com/FasterXML/jackson">jackson</a>
+     */
+    @GetMapping("/getUserInfo1")
+    public UserInfo getUserInfo1(HttpServletRequest request, HttpServletResponse response, String username) {
+        log.debug("username：{}", username);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(counter.incrementAndGet());
+        userInfo.setUsername("徐晓伟");
+        userInfo.setPassword(UUID.randomUUID().toString().replace("-", ""));
+        log.debug("userInfo：{}", userInfo);
+        return userInfo;
+    }
+
+    /**
+     * 获取实体类（JSON 类型）
+     *
+     * @param request
+     * @param response
+     * @param username 参数
+     * @return 返回实体类，{@link User} 转换为 JSON
+     * @see <a href="https://github.com/FasterXML/jackson">jackson</a>
+     */
+    @GetMapping(value = "/getUserInfoJson", produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserInfo getUserInfoJson(HttpServletRequest request, HttpServletResponse response, String username) {
+        log.debug("username：{}", username);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(counter.incrementAndGet());
+        userInfo.setUsername("徐晓伟");
+        userInfo.setPassword(UUID.randomUUID().toString().replace("-", ""));
+        log.debug("userInfo：{}", userInfo);
+        return userInfo;
+    }
+
+    /**
+     * 获取实体类（XML 类型）
+     *
+     * @param request
+     * @param response
+     * @param username 参数
+     * @return 返回实体类，{@link User} 转换为 XML
+     * @see <a href="https://github.com/FasterXML/jackson">jackson</a>
+     */
+    @GetMapping(value = "/getUserInfoXml", produces = MediaType.APPLICATION_XML_VALUE)
+    public UserInfo getUserInfoXml(HttpServletRequest request, HttpServletResponse response, String username) {
+        log.debug("username：{}", username);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(counter.incrementAndGet());
+        userInfo.setUsername("徐晓伟");
+        userInfo.setPassword(UUID.randomUUID().toString().replace("-", ""));
+        log.debug("userInfo：{}", userInfo);
+        return userInfo;
+    }
 
     /**
      * 获取实体类
