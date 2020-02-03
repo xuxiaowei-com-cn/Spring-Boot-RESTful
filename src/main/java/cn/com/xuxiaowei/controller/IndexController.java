@@ -21,10 +21,10 @@ public class IndexController {
     /**
      * 主页、域名
      *
-     * @param request
-     * @param response
-     * @param model
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @param model    页面范围
+     * @return 返回页面位置及名称
      */
     @RequestMapping(value = {"", "/index"})
     public String index(HttpServletRequest request, HttpServletResponse response, Model model) {

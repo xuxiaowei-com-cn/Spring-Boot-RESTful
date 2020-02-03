@@ -27,9 +27,9 @@ public class GetForEntityRestController {
     /**
      * Get 根据 URL（字符串）、实体类 {@link User} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回请求结果
      * @see RestTemplate#getForEntity(String, Class, Object...) 字符串类型的 URL
      */
     @GetMapping("/getForEntity1")
@@ -52,9 +52,9 @@ public class GetForEntityRestController {
     /**
      * Get 根据 URL（{@link URI}）、实体类 {@link User} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回请求结果
      * @see RestTemplate#getForEntity(URI, Class) {@link URI} 类型的 URL
      */
     @GetMapping("/getForEntity2")
@@ -77,9 +77,9 @@ public class GetForEntityRestController {
     /**
      * Get 根据 URL（字符串）、{@link String} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回请求结果
      * @see RestTemplate#getForEntity(String, Class, Object...) 字符串类型的 URL
      */
     @GetMapping("/getForEntity3")
@@ -102,9 +102,9 @@ public class GetForEntityRestController {
     /**
      * Get 根据 URL（字符串）、参数、{@link String} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回请求结果
      * @see RestTemplate#getForEntity(String, Class, Map) 字符串类型的 URL
      */
     @GetMapping("/getForEntity4")

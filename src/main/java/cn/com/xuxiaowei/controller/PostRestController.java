@@ -28,8 +28,8 @@ public class PostRestController {
     /**
      * 获取实体类
      *
-     * @param request
-     * @param response
+     * @param request  请求
+     * @param response 响应
      * @param username 参数
      * @return 返回实体类，使用 jackson 将 {@link User} 转换为 JSON
      * @see <a href="https://github.com/FasterXML/jackson">jackson</a>

@@ -26,9 +26,9 @@ public class PostForObjectRestController {
     /**
      * Post 根据 URL（字符串）、实体类 {@link User} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回实体类
      * @see RestTemplate#postForObject(String, Object, Class, Object...) 字符串类型的 URL
      */
     @PostMapping("/postForObject1")
@@ -51,9 +51,9 @@ public class PostForObjectRestController {
     /**
      * Post 根据 URL（{@link URI}）、实体类 {@link User} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回实体类
      * @see RestTemplate#postForObject(URI, Object, Class) 字符串类型的 URL
      */
     @PostMapping("/postForObject2")
@@ -76,9 +76,9 @@ public class PostForObjectRestController {
     /**
      * Post 根据 URL（字符串）、{@link String} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回实体类
      * @see RestTemplate#postForObject(String, Object, Class, Object...) 字符串类型的 URL
      */
     @PostMapping("/postForObject3")
@@ -101,9 +101,9 @@ public class PostForObjectRestController {
     /**
      * Post 根据 URL（字符串）、参数、{@link String} 解析返回结果
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request  请求
+     * @param response 响应
+     * @return 返回实体类
      * @see RestTemplate#postForObject(String, Object, Class, Map) 字符串类型的 URL
      */
     @PostMapping("/postForObject4")
