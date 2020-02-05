@@ -105,6 +105,10 @@ public class GetRestController {
      */
     @GetMapping("/getUser1")
     public User getUser1(HttpServletRequest request, HttpServletResponse response, String username) {
+
+        String testHeaderName = request.getHeader("testHeaderName");
+        log.debug("接收到的 Header：testHeaderName：{}", testHeaderName);
+
         return getUser(username);
     }
 
