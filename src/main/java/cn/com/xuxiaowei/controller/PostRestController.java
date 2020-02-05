@@ -36,6 +36,10 @@ public class PostRestController {
      */
     @PostMapping("/postUser1")
     public User postUser1(HttpServletRequest request, HttpServletResponse response, String username) {
+
+        String testHeaderName = request.getHeader("testHeaderName");
+        log.debug("接收到的 Header：testHeaderName：{}", testHeaderName);
+
         log.debug("username：{}", username);
         User user = new User();
         user.setUserId(counter.incrementAndGet());
