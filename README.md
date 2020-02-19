@@ -8,6 +8,8 @@
 
 # [为 RESTful Web 服务启用跨源请求](https://spring.io/guides/gs/rest-service-cors/)
 
+# 根据后缀名响应不同的数据
+
 ## Header 默认值
 
 ### POST
