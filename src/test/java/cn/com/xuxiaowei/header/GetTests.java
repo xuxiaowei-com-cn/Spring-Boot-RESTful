@@ -36,22 +36,22 @@ class GetTests {
     /**
      * 创建 RestTemplate 示例
      */
-    private CustomRestTemplate customRestTemplate = new CustomRestTemplate();
+    private final CustomRestTemplate customRestTemplate = new CustomRestTemplate();
 
     /**
      * 放置 Header
      */
-    private HttpHeaders httpHeaders = new HttpHeaders();
+    private final HttpHeaders httpHeaders = new HttpHeaders();
 
     /**
      * URL，带参数，使用占位符，如果使用了参数，下面的 Map 必须有与之对应的 Key 值
      */
-    private String url = "http://127.0.0.1:8080/getUser1?username={username}";
+    private final String url = "http://127.0.0.1:8080/getUser1?username={username}";
 
     /**
      * 放置参数的 Map
      */
-    private Map<String, String> uriVariables = new HashMap<>(4);
+    private final Map<String, String> uriVariables = new HashMap<>(4);
 
     @Test
     void getForEntity() {

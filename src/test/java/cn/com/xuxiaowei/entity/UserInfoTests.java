@@ -32,7 +32,7 @@ import java.util.UUID;
 @SpringBootTest
 class UserInfoTests {
 
-    private XmlMapper xmlMapper = new XmlMapper();
+    private final XmlMapper xmlMapper = new XmlMapper();
 
     /**
      * XML 与 Bean 相互转化
