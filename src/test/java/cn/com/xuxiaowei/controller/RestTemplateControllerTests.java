@@ -1,5 +1,6 @@
 package cn.com.xuxiaowei.controller;
 
+import cn.com.xuxiaowei.util.RestTemplateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,25 +51,28 @@ public class RestTemplateControllerTests {
      * 将数据使用流发送
      */
     @Test
-    void inputStream() {
-
-        // Body 参数
+    void postForEntityInputStream() {
         Map<String, Object> map = new HashMap<>();
         map.put("UUID", UUID.randomUUID().toString());
 
-        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity = RestTemplateUtils.postForEntityInputStream(APPLICATION_JSON_URL, map, MediaType.APPLICATION_JSON, String.class);
 
-        // 默认：Accept=[text/plain, application/xml, text/xml, application/json, application/*+xml, application/*+json, */*]
-        HttpHeaders httpHeaders = new HttpHeaders();
-        // 设置请求参数流格式
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Map<String, Object>> httpEntity = new HttpEntity<>(map, httpHeaders);
-
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(APPLICATION_JSON_URL, httpEntity, String.class);
         log.info("StatusCode：{}", responseEntity.getStatusCode());
         log.info("Headers：{}", responseEntity.getHeaders());
         log.info("Body：{}", responseEntity.getBody());
+    }
 
+    /**
+     * 将数据使用流发送
+     */
+    @Test
+    void postForObjectInputStream() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("UUID", UUID.randomUUID().toString());
+
+        String response = RestTemplateUtils.postForObjectInputStream(APPLICATION_JSON_URL, map, MediaType.APPLICATION_JSON, String.class);
+
+        log.info("response：{}", response);
     }
 
     /**
