@@ -5,12 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,78 +76,57 @@ public class RestTemplateControllerTests {
      * 将数据使用键值对发送
      */
     @Test
-    void parameterMap() {
-
-        // Parameter 参数
+    void postForEntityParameterMap() {
         Map<String, Object> map = new HashMap<>();
         map.put("UUID", UUID.randomUUID().toString());
 
-        // 以下为处理参数与URL
-        StringBuilder parameterURLBuilder = new StringBuilder(APPLICATION_JSON_URL);
-        parameterURLBuilder.append("?");
-        for (Map.Entry<String, Object> entries : map.entrySet()) {
-            String key = entries.getKey();
-            parameterURLBuilder.append(key).append("={").append(key).append("}&");
-        }
-        String parameterURL = parameterURLBuilder.toString();
-        // 以上为处理参数与URL
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        // 默认：Accept=[text/plain, application/xml, text/xml, application/json, application/*+xml, application/*+json, */*]
-        HttpHeaders httpHeaders = new HttpHeaders();
-        // 设置请求参数流格式
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
-
-        // 使用处理好的 URL
-        // URL 参数格式：?parameterName1={mapKey1}&parameterName2={mapKey2}&
-        // 其中：parameterName1 代表参数名，{mapKey1} 代表 Map 中的键
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(parameterURL, httpEntity, String.class, map);
+        ResponseEntity<String> responseEntity = RestTemplateUtils.postForEntityParameterMap(APPLICATION_JSON_URL, map, MediaType.APPLICATION_JSON, String.class);
 
         log.info("StatusCode：{}", responseEntity.getStatusCode());
         log.info("Headers：{}", responseEntity.getHeaders());
         log.info("Body：{}", responseEntity.getBody());
+    }
 
+
+    /**
+     * 将数据使用键值对发送
+     */
+    @Test
+    void postForObjectParameterMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("UUID", UUID.randomUUID().toString());
+
+        String response = RestTemplateUtils.postForObjectParameterMap(APPLICATION_JSON_URL, map, MediaType.APPLICATION_JSON, String.class);
+
+        log.info("response：{}", response);
     }
 
     /**
      * 将数据使用键值对与流发送
      */
     @Test
-    void inputStreamAndParameterMap() {
-
-        // Parameter 参数
+    void postForEntityInputStreamAndParameterMap() {
         Map<String, Object> map = new HashMap<>();
         map.put("UUID", UUID.randomUUID().toString());
 
-        // 以下为处理参数与URL
-        StringBuilder parameterURLBuilder = new StringBuilder(APPLICATION_JSON_URL);
-        parameterURLBuilder.append("?");
-        for (Map.Entry<String, Object> entries : map.entrySet()) {
-            String key = entries.getKey();
-            parameterURLBuilder.append(key).append("={").append(key).append("}&");
-        }
-        String parameterURL = parameterURLBuilder.toString();
-        // 以上为处理参数与URL
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        // 默认：Accept=[text/plain, application/xml, text/xml, application/json, application/*+xml, application/*+json, */*]
-        HttpHeaders httpHeaders = new HttpHeaders();
-        // 设置请求参数流格式
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Map<String, Object>> httpEntity = new HttpEntity<>(map, httpHeaders);
-
-        // 使用处理好的 URL
-        // URL 参数格式：?parameterName1={mapKey1}&parameterName2={mapKey2}&
-        // 其中：parameterName1 代表参数名，{mapKey1} 代表 Map 中的键
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(parameterURL, httpEntity, String.class, map);
+        ResponseEntity<String> responseEntity = RestTemplateUtils.postForEntityInputStreamAndParameterMap(APPLICATION_JSON_URL, map, MediaType.APPLICATION_JSON, String.class);
 
         log.info("StatusCode：{}", responseEntity.getStatusCode());
         log.info("Headers：{}", responseEntity.getHeaders());
         log.info("Body：{}", responseEntity.getBody());
+    }
 
+    /**
+     * 将数据使用键值对与流发送
+     */
+    @Test
+    void postForObjectInputStreamAndParameterMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("UUID", UUID.randomUUID().toString());
+
+        String response = RestTemplateUtils.postForObjectInputStreamAndParameterMap(APPLICATION_JSON_URL, map, MediaType.APPLICATION_JSON, String.class);
+
+        log.info("response：{}", response);
     }
 
 

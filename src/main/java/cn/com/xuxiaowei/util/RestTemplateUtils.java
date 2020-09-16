@@ -104,4 +104,130 @@ public class RestTemplateUtils {
         return restTemplate.postForObject(url, httpEntity, responseType);
     }
 
+    /**
+     * 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求
+     *
+     * @param url          URL
+     * @param map          Map 类型的参数，如：{@link HashMap}、{@link LinkedMultiValueMap}
+     * @param mediaType    请求数据类型，如：{@link MediaType#APPLICATION_JSON}、{@link MediaType#APPLICATION_XML}
+     * @param responseType 响应数据类
+     * @param <T>          响应数据类泛型
+     * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     */
+    public static <T> ResponseEntity<T> postForEntityParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // 设置请求参数流格式
+        httpHeaders.setContentType(mediaType);
+        HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(httpHeaders);
+
+        // 以下为处理参数与URL
+        StringBuilder parameterUrlBuilder = new StringBuilder(url);
+        parameterUrlBuilder.append("?");
+        for (Map.Entry<?, ?> entries : map.entrySet()) {
+            Object key = entries.getKey();
+            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
+        }
+        String parameterUrl = parameterUrlBuilder.toString();
+        // 以上为处理参数与URL
+
+        return restTemplate.postForEntity(parameterUrl, httpEntity, responseType, map);
+    }
+
+
+    /**
+     * 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求
+     *
+     * @param url          URL
+     * @param map          Map 类型的参数，如：{@link HashMap}、{@link LinkedMultiValueMap}
+     * @param mediaType    请求数据类型，如：{@link MediaType#APPLICATION_JSON}、{@link MediaType#APPLICATION_XML}
+     * @param responseType 响应数据类
+     * @param <T>          响应数据类泛型
+     * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     */
+    public static <T> T postForObjectParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // 设置请求参数流格式
+        httpHeaders.setContentType(mediaType);
+        HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(httpHeaders);
+
+        // 以下为处理参数与URL
+        StringBuilder parameterUrlBuilder = new StringBuilder(url);
+        parameterUrlBuilder.append("?");
+        for (Map.Entry<?, ?> entries : map.entrySet()) {
+            Object key = entries.getKey();
+            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
+        }
+        String parameterUrl = parameterUrlBuilder.toString();
+        // 以上为处理参数与URL
+
+        return restTemplate.postForObject(parameterUrl, httpEntity, responseType, map);
+    }
+
+    /**
+     * 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求
+     *
+     * @param url          URL
+     * @param map          Map 类型的参数，如：{@link HashMap}、{@link LinkedMultiValueMap}
+     * @param mediaType    请求数据类型，如：{@link MediaType#APPLICATION_JSON}、{@link MediaType#APPLICATION_XML}
+     * @param responseType 响应数据类
+     * @param <T>          响应数据类泛型
+     * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     */
+    public static <T> ResponseEntity<T> postForEntityInputStreamAndParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // 设置请求参数流格式
+        httpHeaders.setContentType(mediaType);
+        HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
+
+        // 以下为处理参数与URL
+        StringBuilder parameterUrlBuilder = new StringBuilder(url);
+        parameterUrlBuilder.append("?");
+        for (Map.Entry<?, ?> entries : map.entrySet()) {
+            Object key = entries.getKey();
+            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
+        }
+        String parameterUrl = parameterUrlBuilder.toString();
+        // 以上为处理参数与URL
+
+        return restTemplate.postForEntity(parameterUrl, httpEntity, responseType, map);
+    }
+
+
+    /**
+     * 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求
+     *
+     * @param url          URL
+     * @param map          Map 类型的参数，如：{@link HashMap}、{@link LinkedMultiValueMap}
+     * @param mediaType    请求数据类型，如：{@link MediaType#APPLICATION_JSON}、{@link MediaType#APPLICATION_XML}
+     * @param responseType 响应数据类
+     * @param <T>          响应数据类泛型
+     * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     */
+    public static <T> T postForObjectInputStreamAndParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // 设置请求参数流格式
+        httpHeaders.setContentType(mediaType);
+        HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
+
+        // 以下为处理参数与URL
+        StringBuilder parameterUrlBuilder = new StringBuilder(url);
+        parameterUrlBuilder.append("?");
+        for (Map.Entry<?, ?> entries : map.entrySet()) {
+            Object key = entries.getKey();
+            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
+        }
+        String parameterUrl = parameterUrlBuilder.toString();
+        // 以上为处理参数与URL
+
+        return restTemplate.postForObject(parameterUrl, httpEntity, responseType, map);
+    }
+
 }
