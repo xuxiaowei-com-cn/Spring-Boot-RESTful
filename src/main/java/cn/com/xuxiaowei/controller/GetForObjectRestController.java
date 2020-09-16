@@ -16,6 +16,7 @@
 package cn.com.xuxiaowei.controller;
 
 import cn.com.xuxiaowei.entity.User;
+import cn.com.xuxiaowei.util.RestTemplateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -128,7 +129,7 @@ public class GetForObjectRestController {
         RestTemplate restTemplate = new RestTemplate();
 
         // URL，带参数，使用占位符，如果使用了参数，下面的 Map 必须有与之对应的 Key 值
-        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/getUser1?username={username}");
+        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "/getUser1");
 
         // 放置参数的 Map
         Map<String, String> uriVariables = new HashMap<>(4);
@@ -137,8 +138,10 @@ public class GetForObjectRestController {
         // 如果上面定义了参数了占位符，Map 中必须有与之对应的 key 值
         uriVariables.put("username", "xxw");
 
+        String parameterUrl = RestTemplateUtils.parameterUrl(url, uriVariables);
+
         // 使用指定实体类解析返回结果
-        String getString = restTemplate.getForObject(url, String.class, uriVariables);
+        String getString = restTemplate.getForObject(parameterUrl, String.class, uriVariables);
 
         log.debug(String.valueOf(getString));
 
