@@ -78,6 +78,7 @@ public class RestTemplateUtils {
         HttpHeaders httpHeaders = new HttpHeaders();
         // 设置请求参数流格式
         httpHeaders.setContentType(mediaType);
+
         HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
 
         return restTemplate.postForEntity(url, httpEntity, responseType);
@@ -99,6 +100,7 @@ public class RestTemplateUtils {
         HttpHeaders httpHeaders = new HttpHeaders();
         // 设置请求参数流格式
         httpHeaders.setContentType(mediaType);
+
         HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
 
         return restTemplate.postForObject(url, httpEntity, responseType);
@@ -120,17 +122,10 @@ public class RestTemplateUtils {
         HttpHeaders httpHeaders = new HttpHeaders();
         // 设置请求参数流格式
         httpHeaders.setContentType(mediaType);
+
         HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(httpHeaders);
 
-        // 以下为处理参数与URL
-        StringBuilder parameterUrlBuilder = new StringBuilder(url);
-        parameterUrlBuilder.append("?");
-        for (Map.Entry<?, ?> entries : map.entrySet()) {
-            Object key = entries.getKey();
-            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
-        }
-        String parameterUrl = parameterUrlBuilder.toString();
-        // 以上为处理参数与URL
+        String parameterUrl = parameterUrl(url, map);
 
         return restTemplate.postForEntity(parameterUrl, httpEntity, responseType, map);
     }
@@ -152,17 +147,10 @@ public class RestTemplateUtils {
         HttpHeaders httpHeaders = new HttpHeaders();
         // 设置请求参数流格式
         httpHeaders.setContentType(mediaType);
+
         HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(httpHeaders);
 
-        // 以下为处理参数与URL
-        StringBuilder parameterUrlBuilder = new StringBuilder(url);
-        parameterUrlBuilder.append("?");
-        for (Map.Entry<?, ?> entries : map.entrySet()) {
-            Object key = entries.getKey();
-            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
-        }
-        String parameterUrl = parameterUrlBuilder.toString();
-        // 以上为处理参数与URL
+        String parameterUrl = parameterUrl(url, map);
 
         return restTemplate.postForObject(parameterUrl, httpEntity, responseType, map);
     }
@@ -183,17 +171,10 @@ public class RestTemplateUtils {
         HttpHeaders httpHeaders = new HttpHeaders();
         // 设置请求参数流格式
         httpHeaders.setContentType(mediaType);
+
         HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
 
-        // 以下为处理参数与URL
-        StringBuilder parameterUrlBuilder = new StringBuilder(url);
-        parameterUrlBuilder.append("?");
-        for (Map.Entry<?, ?> entries : map.entrySet()) {
-            Object key = entries.getKey();
-            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
-        }
-        String parameterUrl = parameterUrlBuilder.toString();
-        // 以上为处理参数与URL
+        String parameterUrl = parameterUrl(url, map);
 
         return restTemplate.postForEntity(parameterUrl, httpEntity, responseType, map);
     }
@@ -215,7 +196,21 @@ public class RestTemplateUtils {
         HttpHeaders httpHeaders = new HttpHeaders();
         // 设置请求参数流格式
         httpHeaders.setContentType(mediaType);
+
         HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
+
+        String parameterUrl = parameterUrl(url, map);
+        return restTemplate.postForObject(parameterUrl, httpEntity, responseType, map);
+    }
+
+    /**
+     * 根据 URL与参数 获取符合发送请求的 URL
+     *
+     * @param url URL
+     * @param map 参数
+     * @return 返回 根据 URL与参数 获取符合发送请求的 URL 结果
+     */
+    private static String parameterUrl(String url, Map<?, ?> map) {
 
         // 以下为处理参数与URL
         StringBuilder parameterUrlBuilder = new StringBuilder(url);
@@ -224,10 +219,8 @@ public class RestTemplateUtils {
             Object key = entries.getKey();
             parameterUrlBuilder.append(key).append("={").append(key).append("}&");
         }
-        String parameterUrl = parameterUrlBuilder.toString();
-        // 以上为处理参数与URL
 
-        return restTemplate.postForObject(parameterUrl, httpEntity, responseType, map);
+        return parameterUrlBuilder.toString();
     }
 
 }
