@@ -210,7 +210,7 @@ public class RestTemplateUtils {
      * @param map 参数
      * @return 返回 根据 URL与参数 获取符合发送请求的 URL 结果
      */
-    private static String parameterUrl(String url, Map<?, ?> map) {
+    public static String parameterUrl(String url, Map<?, ?> map) {
 
         // 以下为处理参数与URL
         StringBuilder parameterUrlBuilder = new StringBuilder(url);
