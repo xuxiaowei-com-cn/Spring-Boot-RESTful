@@ -15,15 +15,24 @@
  */
 package cn.com.xuxiaowei.util;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * {@link RestTemplate} 工具类
+ * <p>
+ * 默认：Accept=[text/plain, application/xml, text/xml, application/json, application/*+xml, application/*+json, *\/*]
  *
  * @author xuxiaowei
  * @since 0.0.1
@@ -51,6 +60,48 @@ public class RestTemplateUtils {
      */
     public static RestTemplate charsetGbk() {
         return charset(Charset.forName("GBK"));
+    }
+
+    /**
+     * 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求
+     *
+     * @param url          URL
+     * @param map          Map 类型的参数，如：{@link HashMap}、{@link LinkedMultiValueMap}
+     * @param mediaType    请求数据类型，如：{@link MediaType#APPLICATION_JSON}、{@link MediaType#APPLICATION_XML}
+     * @param responseType 响应数据类
+     * @param <T>          响应数据类泛型
+     * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     */
+    public static <T> ResponseEntity<T> postForEntityInputStream(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // 设置请求参数流格式
+        httpHeaders.setContentType(mediaType);
+        HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
+
+        return restTemplate.postForEntity(url, httpEntity, responseType);
+    }
+
+    /**
+     * 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求
+     *
+     * @param url          URL
+     * @param map          Map 类型的参数，如：{@link HashMap}、{@link LinkedMultiValueMap}
+     * @param mediaType    请求数据类型，如：{@link MediaType#APPLICATION_JSON}、{@link MediaType#APPLICATION_XML}
+     * @param responseType 响应数据类
+     * @param <T>          响应数据类泛型
+     * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     */
+    public static <T> T postForObjectInputStream(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        // 设置请求参数流格式
+        httpHeaders.setContentType(mediaType);
+        HttpEntity<Map<?, ?>> httpEntity = new HttpEntity<>(map, httpHeaders);
+
+        return restTemplate.postForObject(url, httpEntity, responseType);
     }
 
 }
