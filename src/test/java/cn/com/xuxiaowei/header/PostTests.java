@@ -15,6 +15,7 @@
  */
 package cn.com.xuxiaowei.header;
 
+import cn.com.xuxiaowei.util.RestTemplateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,7 +47,7 @@ class PostTests {
     /**
      * URL，带参数，使用占位符，如果使用了参数，下面的 Map 必须有与之对应的 Key 值
      */
-    private final String url = "http://127.0.0.1:8080/postUser1?username={username}";
+    private final String url = "http://127.0.0.1:8080/postUser1";
 
     /**
      * 放置参数的 Map
@@ -63,8 +64,10 @@ class PostTests {
         // 如果上面定义了参数了占位符，Map 中必须有与之对应的 key 值
         uriVariables.put("username", "xxw");
 
+        String parameterUrl = RestTemplateUtils.parameterUrl(url, uriVariables);
+
         // 使用指定实体类解析返回结果
-        ResponseEntity<String> forEntity = restTemplate.postForEntity(url, requestEntity, String.class, uriVariables);
+        ResponseEntity<String> forEntity = restTemplate.postForEntity(parameterUrl, requestEntity, String.class, uriVariables);
 
         log.debug(String.valueOf(forEntity));
     }
@@ -79,8 +82,10 @@ class PostTests {
         // 如果上面定义了参数了占位符，Map 中必须有与之对应的 key 值
         uriVariables.put("username", "xxw");
 
+        String parameterUrl = RestTemplateUtils.parameterUrl(url, uriVariables);
+
         // 使用指定实体类解析返回结果
-        String postString = restTemplate.postForObject(url, requestEntity, String.class, uriVariables);
+        String postString = restTemplate.postForObject(parameterUrl, requestEntity, String.class, uriVariables);
 
         log.debug(postString);
     }
