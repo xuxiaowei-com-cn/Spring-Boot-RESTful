@@ -37,3 +37,6 @@
     - 127.0.0.1:8080
 - connection
     - keep-alive
+    
+## 说明
+- spring 3.0.5 及之前的版本 RestTemplate 不支持设置超时，3.0.6 开始支持超时
