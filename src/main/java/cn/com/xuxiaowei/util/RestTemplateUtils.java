@@ -217,7 +217,7 @@ public class RestTemplateUtils {
         parameterUrlBuilder.append("?");
         for (Map.Entry<?, ?> entries : map.entrySet()) {
             Object key = entries.getKey();
-            parameterUrlBuilder.append(key).append("={").append(key).append("}&");
+            parameterUrlBuilder.append(key).append("=").append(value).append("&");
         }
 
         return parameterUrlBuilder.toString();
