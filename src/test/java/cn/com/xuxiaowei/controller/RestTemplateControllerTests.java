@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -74,9 +75,11 @@ public class RestTemplateControllerTests {
 
     /**
      * 将数据使用键值对发送
+     *
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
     @Test
-    void postForEntityParameterMap() {
+    void postForEntityParameterMap() throws UnsupportedEncodingException {
         Map<String, Object> map = new HashMap<>();
         map.put("UUID", UUID.randomUUID().toString());
 
@@ -90,9 +93,11 @@ public class RestTemplateControllerTests {
 
     /**
      * 将数据使用键值对发送
+     *
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
     @Test
-    void postForObjectParameterMap() {
+    void postForObjectParameterMap() throws UnsupportedEncodingException {
         Map<String, Object> map = new HashMap<>();
         map.put("UUID", UUID.randomUUID().toString());
 
@@ -103,9 +108,11 @@ public class RestTemplateControllerTests {
 
     /**
      * 将数据使用键值对与流发送
+     *
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
     @Test
-    void postForEntityInputStreamAndParameterMap() {
+    void postForEntityInputStreamAndParameterMap() throws UnsupportedEncodingException {
         Map<String, Object> map = new HashMap<>();
         map.put("UUID", UUID.randomUUID().toString());
 
@@ -118,9 +125,11 @@ public class RestTemplateControllerTests {
 
     /**
      * 将数据使用键值对与流发送
+     *
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
     @Test
-    void postForObjectInputStreamAndParameterMap() {
+    void postForObjectInputStreamAndParameterMap() throws UnsupportedEncodingException {
         Map<String, Object> map = new HashMap<>();
         map.put("UUID", UUID.randomUUID().toString());
 

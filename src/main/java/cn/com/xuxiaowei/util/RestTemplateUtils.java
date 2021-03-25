@@ -24,6 +24,8 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +42,14 @@ import java.util.Map;
 public class RestTemplateUtils {
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+
+        String encode = URLEncoder.encode("{}", "UTF-8");
+
+        System.out.println(encode);
+
+    }
 
     /**
      * 获取指定编码类型的响应数据返回
@@ -115,8 +125,9 @@ public class RestTemplateUtils {
      * @param responseType 响应数据类
      * @param <T>          响应数据类泛型
      * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
-    public static <T> ResponseEntity<T> postForEntityParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+    public static <T> ResponseEntity<T> postForEntityParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) throws UnsupportedEncodingException {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -140,8 +151,9 @@ public class RestTemplateUtils {
      * @param responseType 响应数据类
      * @param <T>          响应数据类泛型
      * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
-    public static <T> T postForObjectParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+    public static <T> T postForObjectParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) throws UnsupportedEncodingException {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -164,8 +176,9 @@ public class RestTemplateUtils {
      * @param responseType 响应数据类
      * @param <T>          响应数据类泛型
      * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
-    public static <T> ResponseEntity<T> postForEntityInputStreamAndParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+    public static <T> ResponseEntity<T> postForEntityInputStreamAndParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) throws UnsupportedEncodingException {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -190,7 +203,7 @@ public class RestTemplateUtils {
      * @param <T>          响应数据类泛型
      * @return 返回 根据 URL、参数、请求数据类型、响应数据类 发送 POST 请求 结果
      */
-    public static <T> T postForObjectInputStreamAndParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) {
+    public static <T> T postForObjectInputStreamAndParameterMap(String url, Map<?, ?> map, MediaType mediaType, Class<T> responseType) throws UnsupportedEncodingException {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -209,8 +222,9 @@ public class RestTemplateUtils {
      * @param url URL
      * @param map 参数
      * @return 返回 根据 URL与参数 获取符合发送请求的 URL 结果
+     * @throws UnsupportedEncodingException 参数值转译失败
      */
-    public static String parameterUrl(String url, Map<?, ?> map) {
+    public static String parameterUrl(String url, Map<?, ?> map) throws UnsupportedEncodingException {
 
         // 以下为处理参数与URL
         StringBuilder parameterUrlBuilder = new StringBuilder(url);
@@ -218,7 +232,8 @@ public class RestTemplateUtils {
         for (Map.Entry<?, ?> entries : map.entrySet()) {
             Object key = entries.getKey();
             Object value = entries.getValue();
-            parameterUrlBuilder.append(key).append("=").append(value).append("&");
+            String encode = URLEncoder.encode(value.toString(), "UTF-8");
+            parameterUrlBuilder.append(key).append("=").append(encode).append("&");
         }
 
         return parameterUrlBuilder.toString();
