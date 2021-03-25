@@ -24,6 +24,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.CustomRestTemplate;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,8 +55,11 @@ class GetTests {
      */
     private final Map<String, String> uriVariables = new HashMap<>(4);
 
+    /**
+     * @throws UnsupportedEncodingException 参数值转译失败
+     */
     @Test
-    void getForEntity() {
+    void getForEntity() throws UnsupportedEncodingException {
 
         httpHeaders.add("testHeaderName", "testHeaderValue");
         HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
@@ -72,8 +76,11 @@ class GetTests {
         log.debug(String.valueOf(forEntity));
     }
 
+    /**
+     * @throws UnsupportedEncodingException 参数值转译失败
+     */
     @Test
-    void getForObject() {
+    void getForObject() throws UnsupportedEncodingException {
 
         httpHeaders.add("testHeaderName", "testHeaderValue");
         HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);

@@ -43,14 +43,6 @@ public class RestTemplateUtils {
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-
-        String encode = URLEncoder.encode("{}", "UTF-8");
-
-        System.out.println(encode);
-
-    }
-
     /**
      * 获取指定编码类型的响应数据返回
      *

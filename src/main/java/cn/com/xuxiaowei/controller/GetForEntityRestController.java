@@ -25,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -121,10 +122,11 @@ public class GetForEntityRestController {
      * @param request  请求
      * @param response 响应
      * @return 返回请求结果
+     * @throws UnsupportedEncodingException 参数值转译失败
      * @see RestTemplate#getForEntity(String, Class, Map) 字符串类型的 URL
      */
     @GetMapping("/getForEntity4")
-    public ResponseEntity<String> getForEntity4(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<String> getForEntity4(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
         // 创建 RestTemplate 示例
         RestTemplate restTemplate = new RestTemplate();
